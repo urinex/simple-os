@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="hi-en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BCAC0022 - OS Study Hub</title>
+<link rel="stylesheet" href="style.css"></head><body>
+<button class="hamburger" onclick="document.getElementById('sidebar').classList.toggle('open')">&#9776;</button>
+<nav class="sidebar" id="sidebar">
+<h2>OS Study Hub</h2>
+<div class="ng">Syllabus Units</div>
+<div class="ni active" onclick="showS('home',this)">Home / Overview</div>
+<div class="ni" onclick="showS('u1',this)">Unit 1 - Introduction</div>
+<div class="ni" onclick="showS('u2',this)">Unit 2 - Process Mgmt</div>
+<div class="ni" onclick="showS('u3',this)">Unit 3 - CPU Scheduling</div>
+<div class="ni" onclick="showS('u4',this)">Unit 4 - Memory Mgmt</div>
+<div class="ng">Extra Sections</div>
+<div class="ni" onclick="showS('pyq',this)">PYQ Bank</div>
+<div class="ni" onclick="showS('pred',this)">Hot Predictions</div>
+<div class="ni" onclick="showS('num',this)">Numericals Practice</div>
+<div class="ni" onclick="showS('form',this)">Formula Sheet</div>
+</nav>
+<button class="back-top" id="bt" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+<div class="main">
+<div class="section active" id="home">
+<h1>BCAC0022 - Operating System</h1>
+<p style="color:var(--txt2)">BCA/BCA(DS), Year-II, Semester-III | Mid-Term Exam Study Hub</p>
+<div class="ib"><strong>Exam Format:</strong><br>Total Marks: 30 | Time: 2 Hours<br>Section A: 5x3=15 marks | Section B: 3x5=15 marks</div>
+<h3>Syllabus Coverage</h3>
+<table><tr><th>Unit</th><th>Topic</th><th>Importance</th></tr>
+<tr><td>Unit 1</td><td>Introduction to OS</td><td><span class="ptag ph">HIGH</span></td></tr>
+<tr><td>Unit 2</td><td>Process Management</td><td><span class="ptag ph">HIGH</span></td></tr>
+<tr><td>Unit 3</td><td>CPU Scheduling &amp; Deadlock</td><td><span class="ptag ph">HIGH</span></td></tr>
+<tr><td>Unit 4</td><td>Memory Management</td><td><span class="ptag pm">MEDIUM</span> (Exam me nahi aaya! chance hai!)</td></tr></table>
+<div class="wb"><strong>Strategy:</strong><ul>
+<li>Section A: Short notes 3-4 points me ready karo</li>
+<li>Section B: Numericals practice karo (Scheduling + Banker's)</li>
+<li>Unit 4 abhi tak exam me nahi aaya - bada chance hai!</li>
+<li>PYQ se 3-4 questions EXACT repeat hote hai!</li>
+</ul></div></div>
+<div class="section" id="u1">
+<h1>Unit 1 - Introduction to Operating System</h1>
+<h2>1.1 Operating System Kya Hai?</h2>
+<div class="card"><p>OS ek <strong>special software</strong> hai jo hardware aur user ke beech bridge ka kaam karta hai.</p>
+<p><strong>Simple words:</strong> OS ek translator hai jo user ki language samajhta hai aur hardware ko samjhata hai.</p></div>
+<h3>OS ke Functions:</h3><ul>
+<li><strong>Process Management:</strong> CPU allocate karna, scheduling karna</li>
+<li><strong>Memory Management:</strong> RAM allocate/free karna</li>
+<li><strong>File System:</strong> Files organize karna, CRUD operations</li>
+<li><strong>I/O Device Management:</strong> Devices handle karna</li>
+<li><strong>Security:</strong> Unauthorized access se bachana</li>
+<li><strong>User Interface:</strong> CLI ya GUI dena</li></ul>
+<h2>1.2 Classification of Operating Systems</h2>
+<h3>1. Batch OS</h3>
+<div class="card"><p>User interact nahi karta. Jobs cards/tapes pe load hote hain, OS execute karta hai.</p>
+<ul><li>Example: Payroll, Bank statements</li>
+<li>Fayda: Same type jobs efficiently</li>
+<li>Nuksan: Zero interaction, debugging mushkil</li></ul></div>
+<h3>2. Time Sharing OS</h3>
+<div class="card"><p>Har user ko time slice milta hai. Example: UNIX, Linux, Windows. Direct interaction, kam response time.</p></div>
+<h3>3. Real-Time System (RTS)</h3>
+<div class="card"><p>Time ka strict hona zaroori hai. Hard RTS: Deadline miss=failure (Airplane, Pacemaker). Soft RTS: Quality down (Video streaming). Example: Traffic control, Medical monitoring.</p></div>
+<h3>4. Multi-Programming System</h3>
+<div class="card"><p>Multiple programs memory me hain, CPU ek time pe ek execute karta hai. I/O wait pe switch hota hai.</p></div>
+<div class="ib"><strong>Multiprogramming vs Multitasking:</strong>
+<table><tr><th>Feature</th><th>Multiprogramming</th><th>Multitasking</th></tr>
+<tr><td>CPU</td><td>Ek time pe ek active</td><td>Multiple active lagte hain</td></tr>
+<tr><td>Time Sharing</td><td>I/O tak ek pe rehta</td><td>Har ko time slice milta hai</td></tr>
+<tr><td>Example</td><td>Early batch systems</td><td>Windows, Linux, Android</td></tr>
+<tr><td>Interaction</td><td>Kam ya zero</td><td>Direct interaction</td></tr>
+<tr><td>Context Switch</td><td>Kam</td><td>Zyada</td></tr></table></div>
+<h3>5. Multiprocessor Systems</h3>
+<div class="card"><p>2+ CPUs ek saath kaam. Throughput, economy, reliability badhti hai.</p></div>
+<h3>6. Multiuser Systems</h3>
+<div class="card"><p>Ek system pe multiple users (UNIX/Linux terminal).</p></div>
+<h3>7. Multithreaded Systems</h3>
+<div class="card"><p>Process ke andar multiple threads parallel execute. Code/data share, apna stack.</p></div>
+<h2>1.3 OS Structure</h2>
+<div class="card"><ol>
+<li><strong>Process Manager:</strong> Creation, deletion, suspension</li>
+<li><strong>Memory Manager:</strong> Allocation, paging, segmentation</li>
+<li><strong>File Manager:</strong> File operations, directory</li>
+<li><strong>I/O Manager:</strong> Device allocation, buffering</li>
+<li><strong>Storage Manager:</strong> Disk management</li>
+<li><strong>Network Manager:</strong> Protocols, communication</li>
+<li><strong>User Interface:</strong> CLI/GUI</li></ol></div>
+<h2>1.4 OS Services</h2>
+<div class="card"><ul>
+<li><strong>Program Execution:</strong> Load karna aur run karna</li>
+<li><strong>I/O Operations:</strong> Files/devices se I/O</li>
+<li><strong>File Manipulation:</strong> CRUD operations</li>
+<li><strong>Communication:</strong> Inter-process communication</li>
+<li><strong>Error Detection:</strong> Errors handle karna</li>
+<li><strong>Resource Allocation:</strong> CPU, memory, I/O allocate</li>
+<li><strong>Protection:</strong> Unauthorized access se bachana</li>
+<li><strong>Accounting:</strong> Resource usage track karna</li></ul></div>
+<h2>1.5 Kernels</h2>
+<div class="card"><p><strong>Kernel</strong> OS ka core hai jo hardware se directly baat karta hai. System calls ke through communicate karte hain.</p></div>
+<h3>Monolithic vs Microkernel</h3>
+<table><tr><th>Feature</th><th>Monolithic</th><th>Microkernel</th></tr>
+<tr><td>Design</td><td>Poora OS ek block me</td><td>Sirf essential kernel</td></tr>
+<tr><td>Size</td><td>Bada</td><td>Chhota</td></tr>
+<tr><td>Performance</td><td>Faster (direct calls)</td><td>Thoda slow (IPC zyada)</td></tr>
+<tr><td>Reliability</td><td>Ek crash = sab down</td><td>Zyada reliable</td></tr>
+<tr><td>Example</td><td>Linux, UNIX</td><td>Minix, QNX, L4</td></tr>
+<tr><td>Security</td><td>Kam secure</td><td>Zyada secure</td></tr></table>
+<div class="tb"><strong>Exam Tip:</strong> Table format me 5 points se 3 marks mil jayenge.</div>
+<h2>1.6 System Calls</h2>
+<div class="card"><p><strong>System Calls</strong> = interface jisse user programs OS services use karte hain.</p>
+<ol><li><strong>fork():</strong> Naya process create karta hai parent ki copy</li>
+<li><strong>exec():</strong> Naya program load karta hai, purana replace hota hai</li>
+<li><strong>wait():</strong> Parent child ka wait karta hai</li></ol></div>
+</div>
+<div class="section" id="u2">
+<h1>Unit 2 - Process Management</h1>
+<h2>2.1 Process Concept</h2>
+<div class="card"><p><strong>Process</strong> = program jo execute ho raha hai. Program file me, Process RAM me. Components: PID, PC, Registers, Stack, Data, Heap.</p></div>
+<h2>2.2 Process States (5-State Diagram)</h2>
+<div class="card">
+<div class="diagram"><pre>
+       Long Term Scheduler
+                |
+                v
+ +------+  admit  +--------+  dispatch  +----------+
+ | NEW  | ------->| READY  | ---------->| RUNNING  |
+ +------+         +--------+            +----------+
+                      ^                      |    |
+                  timeout               I/O wait   |
+                      |                      |    |
+                      |           +----------+    |
+                      |           | WAITING  |    |
+                      |           +----------+    |
+                      |               |           |
+                      +<---------+----+           |
+                                |    terminate    |
+                                v                 v
+                          +-----------+
+                          | TERMINATED|
+                          +-----------+
+</pre></div>
+<ol><li><strong>NEW:</strong> Process create ho raha hai</li>
+<li><strong>READY:</strong> Memory me, CPU wait</li>
+<li><strong>RUNNING:</strong> CPU pe execute</li>
+<li><strong>WAITING:</strong> I/O wait</li>
+<li><strong>TERMINATED:</strong> Kaam khatam</li></ol>
+<h4>Transitions:</h4><ul>
+<li>New->Ready: Long-term scheduler admit</li>
+<li>Ready->Running: Short-term scheduler dispatch</li>
+<li>Running->Ready: Time quantum khatam</li>
+<li>Running->Waiting: I/O request</li>
+<li>Waiting->Ready: I/O complete</li>
+<li>Running->Terminated: Exit/crash</li></ul>
+<table><tr><th>Scheduler</th><th>Kya karta hai</th><th>Kab</th></tr>
+<tr><td>Long-Term (Job)</td><td>Process ko memory me admit</td><td>Naye process aane pe</td></tr>
+<tr><td>Short-Term (CPU)</td><td>Ready se Running me select</td><td>Har decision point pe</td></tr>
+<tr><td>Medium-Term</td><td>Swap memory/disk</td><td>Memory kam padne pe</td></tr></table>
+</div>
+<h2>2.3 Process Synchronization</h2>
+<div class="card"><p>Multiple processes ek shared resource access karein to <strong>race condition</strong> ho sakti hai.</p>
+<div class="diagram"><pre>
+PROCESS:
+  +------------------------+
+  | Entry Section          |
+  | CRITICAL SECTION       |
+  | Exit Section           |
+  | Remainder Section      |
+  +------------------------+
+</pre></div>
+<ul><li><strong>Mutual Exclusion:</strong> Ek time pe sirf ek CS me</li>
+<li><strong>Progress:</strong> Koi free ho to koi bhi ja sakta hai</li>
+<li><strong>Bounded Waiting:</strong> Zyada der wait nahi</li></ul></div>
+<h2>2.4 Semaphores</h2>
+<div class="card"><p><strong>Semaphore</strong> = integer variable. Operations: wait() aur signal().</p>
+<div class="code">semaphore s = 1;  // Binary semaphore
+
+wait(s) {
+    s = s - 1;
+    if (s < 0) {
+        block process;
+        add to waiting queue;
+    }
+}
+
+signal(s) {
+    s = s + 1;
+    if (s <= 0) {
+        remove P from waiting queue;
+        wakeup(P);
+    }
+}</div>
+<p>Binary: 0/1 (mutex). Counting: positive integer (resource count).</p></div>
+<h2>2.5 Synchronization Problems</h2>
+<h3>1. Producer-Consumer (Bounded Buffer)</h3>
+<div class="card"><div class="code">semaphore mutex = 1;
+semaphore empty = n;  // buffer size
+semaphore full = 0;
+
+producer() {
+    while(true) {
+        item = produce();
+        wait(empty);    // buffer full to wait
+        wait(mutex);    // CS me jao
+        add item;
+        signal(mutex);  // CS chhodo
+        signal(full);   // consumer ko notify
+    }
+}
+
+consumer() {
+    while(true) {
+        wait(full);     // buffer empty to wait
+        wait(mutex);
+        item = remove();
+        signal(mutex);
+        signal(empty);  // producer ko notify
+        consume(item);
+    }
+}</div></div>
+<h3>2. Dining Philosophers</h3>
+<div class="card"><p>5 philosophers, 5 forks. Har ko 2 forks chahiye. Deadlock possible!</p>
+<div class="code">semaphore fork[5] = {1,1,1,1,1};
+
+philosopher(i) {
+    while(true) {
+        think();
+        wait(fork[i]);           // left
+        wait(fork[(i+1)%5]);     // right
+        eat();
+        signal(fork[i]);
+        signal(fork[(i+1)%5]);
+    }
+}
+// Deadlock avoid: max 4 philosophers allowed</div></div>
+<h3>3. Readers-Writers</h3>
+<div class="card"><div class="code">semaphore mutex = 1;
+semaphore rw_mutex = 1;
+int read_count = 0;
+
+writer() {
+    wait(rw_mutex);
+    // write
+    signal(rw_mutex);
+}
+
+reader() {
+    wait(mutex);
+    read_count++;
+    if(read_count == 1)
+        wait(rw_mutex);  // first reader blocks writers
+    signal(mutex);
+    // read
+    wait(mutex);
+    read_count--;
+    if(read_count == 0)
+        signal(rw_mutex); // last reader unblocks writers
+    signal(mutex);
+}</div>
+<div class="wb"><strong>Problem:</strong> Writers ko starvation ho sakti hai agar readers lagatar aayein.</div></div>
+<h2>2.6 IPC</h2>
+<div class="card"><h4>1. Shared Memory</h4><ul>
+<li>Memory block jo dono processes access kar sakein</li>
+<li>Fast (direct access), synchronization khud karna padta hai</li></ul>
+<h4>2. Message Passing</h4><ul>
+<li>Messages bhejte hain, system calls lagte hain (slow)</li>
+<li>Types: Synchronous/Asynchronous. Examples: Pipes, Queues, Sockets</li></ul></div>
+<h2>2.7 Threads</h2>
+<div class="card"><p>Thread = lightweight process. Code/data share, apna stack/registers/PC.</p>
+<table><tr><th>Feature</th><th>User-Level</th><th>Kernel-Level</th></tr>
+<tr><td>Management</td><td>Library handle</td><td>Kernel handle</td></tr>
+<tr><td>Creation</td><td>Fast</td><td>Slow (system call)</td></tr>
+<tr><td>Blocking</td><td>Ek block = poora process</td><td>Baaki safe</td></tr>
+<tr><td>Multiprocessing</td><td>Ek processor pe</td><td>Multiple processors pe</td></tr></table></div>
+<h2>2.8 Security Issues</h2>
+<div class="card"><ul>
+<li><strong>Buffer Overflow:</strong> Buffer se zyada data, memory overwrite</li>
+<li><strong>Deadlock:</strong> Processes ek doosre ka wait</li>
+<li><strong>Race Condition:</strong> Concurrent access, unpredictable results</li>
+<li><strong>Privilege Escalation:</strong> Unauthorized higher access</li>
+<li><strong>Process Hijacking:</strong> Illegal control</li>
+</ul></div></div>
+<div class="section" id="u3">
+<h1>Unit 3 - CPU Scheduling &amp; Deadlock</h1>
+<h2>3.1 Scheduling Concepts</h2>
+<div class="card"><p>CPU scheduling = kaun sa process pehle CPU lega.</p>
+<div class="fbox">
+<p class="fm">TAT = CT - AT | WT = TAT - BT | RT = FirstResp - AT</p>
+<p class="fm">Avg TAT = Total TAT / N | Avg WT = Total WT / N</p>
+</div></div>
+<h2>3.2 Preemptive vs Non-Preemptive</h2>
+<div class="card"><table><tr><th>Feature</th><th>Preemptive</th><th>Non-Preemptive</th></tr>
+<tr><td>Definition</td><td>Beech me rok ke dusre ko de sakte</td><td>Khatam tak chalega</td></tr>
+<tr><td>Context Switch</td><td>Zyada</td><td>Kam</td></tr>
+<tr><td>Examples</td><td>SRTF, RR, Priority(pre)</td><td>FCFS, SJF, HRRN</td></tr></table></div>
+<h2>3.3 Scheduling Algorithms</h2>
+<h3>1. FCFS</h3>
+<div class="card"><p>Pehle aaya pehle serve. Non-Preemptive. Convoy effect!</p>
+<div class="ib"><p>Q: P1(AT=0,BT=4), P2(AT=1,BT=3), P3(AT=2,BT=1)</p>
+<table><tr><th>P</th><th>AT</th><th>BT</th><th>CT</th><th>TAT</th><th>WT</th></tr>
+<tr><td>P1</td><td>0</td><td>4</td><td>4</td><td>4</td><td>0</td></tr>
+<tr><td>P2</td><td>1</td><td>3</td><td>7</td><td>6</td><td>3</td></tr>
+<tr><td>P3</td><td>2</td><td>1</td><td>8</td><td>6</td><td>5</td></tr></table>
+<p>Avg TAT=5.33, Avg WT=2.67 | Gantt: |P1(0-4)|P2(4-7)|P3(7-8)|</p></div></div>
+<h3>2. SJF</h3>
+<div class="card"><p>Shortest BT pehle. Min avg waiting. Starvation possible.</p>
+<div class="ib"><p>Q: P1(AT=0,BT=6), P2(AT=1,BT=8), P3(AT=2,BT=4), P4(AT=3,BT=2)</p>
+<p>t=0: P1(6). t=6: P4(2),P3(4),P2(8). Pick P4->P3->P2.</p>
+<p>Gantt: |P1(0-6)|P4(6-8)|P3(8-12)|P2(12-20)| Avg WT=5.0</p></div></div>
+<h3>3. SRTF</h3>
+<div class="card"><p>SJF ka preemptive version. Har naye process pe check karo.</p>
+<div class="ib"><p>Q: P1(AT=0,BT=5), P2(AT=1,BT=3), P3(AT=2,BT=1), P4(AT=3,BT=2), P5(AT=4,BT=3)</p>
+<p>Gantt: |P1(0-2)|P3(2-3)|P4(3-5)|P1(5-8)|P2(8-11)|P5(11-14)|</p>
+<p>Avg TAT=6.2, Avg WT=3.4</p></div></div>
+<h3>4. HRRN</h3>
+<div class="card"><p>R = (W+S)/S. SJF+FCFS combo. Non-preemptive.</p>
+<div class="fbox"><p class="fm">Response Ratio = (Waiting + Burst) / Burst</p></div>
+<div class="ib"><p>Q: P1(AT=0,BT=4), P2(AT=1,BT=3), P3(AT=2,BT=5), P4(AT=3,BT=2)</p>
+<p>t=0: P1. Done t=4. R(P2)=2.0, R(P3)=1.4, R(P4)=1.5. Pick P2. t=7.</p>
+<p>R(P3)=2.0, R(P4)=3.0. Pick P4. t=9. Then P3. t=14.</p>
+<p>Avg WT=(0+3+7+4)/4=3.5 | Gantt: |P1(0-4)|P2(4-7)|P4(7-9)|P3(9-14)|</p></div></div>
+<h3>5. Round Robin (RR)</h3>
+<div class="card"><p>Har process ko fixed time quantum milta hai. Preemptive. Fair, no starvation.</p>
+<div class="ib"><p>Q: P1(AT=0,BT=5), P2(AT=1,BT=3), P3(AT=2,BT=1), P4(AT=3,BT=2), P5(AT=4,BT=3) TQ=2</p>
+<div class="code">Gantt: |P1|P2|P3|P4|P5|P1|P2|P5|P1|
+0  2  4  5  7  9  11 13 14 15
+
+P1:CT=14,TAT=14,WT=9
+P2:CT=12,TAT=11,WT=8
+P3:CT=5, TAT=3, WT=2
+P4:CT=7, TAT=4, WT=2
+P5:CT=13,TAT=9, WT=6
+Avg TAT=8.2, Avg WT=5.4</div></div></div>
+<h3>6. Priority Scheduling</h3>
+<div class="card"><p>Priority ke hisab se. Starvation -> Aging se solve. Preemptive/Non-preemptive dono.</p></div>
+<h2>3.4 Types of Scheduling</h2>
+<div class="card"><table><tr><th>Type</th><th>Kya karta hai</th><th>Speed</th></tr>
+<tr><td>Long-Term</td><td>Process ko memory me load</td><td>Slow</td></tr>
+<tr><td>Medium-Term</td><td>Swap memory/disk</td><td>Medium</td></tr>
+<tr><td>Short-Term</td><td>Ready se CPU select</td><td>Fast</td></tr></table></div>
+<h2>3.5 DEADLOCK</h2>
+<h3>Deadlock Kya Hai?</h3>
+<div class="card"><p>2+ processes ek doosre ke resources wait karte rahein aur koi chhodne ko taiyar na ho. Sab freeze!</p>
+<p><strong>Real-life:</strong> Do log narrow bridge pe - dono chahte hain dusra hatt jaaye!</p></div>
+<h3>Deadlock ke 4 Necessary Conditions</h3>
+<div class="card"><div class="wb"><p>Ye 4 conditions ek saath honi chahiye! Agar ek bhi tut jaaye to deadlock nahi hoga!</p></div>
+<ol>
+<li><strong>Mutual Exclusion:</strong> Resource non-sharable hai. Ek time pe sirf ek use kar sakti hai.</li>
+<li><strong>Hold and Wait:</strong> Process ne kuch resources hold kiye hain aur doosron ka wait kar raha hai.</li>
+<li><strong>No Preemption:</strong> Resources forcefully nahi le sakte - process khud chhode.</li>
+<li><strong>Circular Wait:</strong> P1 waits P2, P2 waits P3, P3 waits P1 - circular chain.</li>
+</ol></div>
+<h3>Deadlock Prevention</h3>
+<div class="card"><ul>
+<li><strong>Mutual Exclusion todna:</strong> Sharable resources use karo (hamesha possible nahi)</li>
+<li><strong>Hold &amp; Wait todna:</strong> Sab resources ek saath do (all-or-nothing) ya naye maangne pe purane chhod de</li>
+<li><strong>No Preemption todna:</strong> Agar naye nahi le pa raha to hold kiye hain forcefully le lo</li>
+<li><strong>Circular Wait todna:</strong> Resources ko order me number do, sirf ascending order me maango</li>
+</ul></div>
+<h3>Deadlock Avoidance - Banker's Algorithm</h3>
+<div class="card"><p>Before allocating, check karo system safe state me rahega ya nahi.</p>
+<h4>Steps:</h4><ol>
+<li><strong>Need Matrix</strong> nikalo: Need[i] = Max[i] - Allocation[i]</li>
+<li><strong>Safe Sequence</strong> dhundho: Process jiska Need &lt;= Available ho, use execute karo. Available += Allocation[i]. Repeat.</li>
+<li>Agar sab ho gaye to SAFE, nahi to UNSAFE.</li>
+</ol>
+<div class="ib"><p><strong>Solved Example:</strong></p>
+<div class="code">Given: 4 Processes, 3 Resources: A(6),B(4),C(3)
+Avail = A:1,B:1,C:0
+
+Need = Max - Allocation
+
+Find process where Need <= Available
+Execute it, Available += Allocation[that process]
+Repeat until all done or stuck
+
+If all processes complete = SAFE STATE
+Safe sequence exists = No deadlock</div></div></div>
+<h3>Deadlock Detection &amp; Recovery</h3>
+<div class="card"><h4>Detection:</h4><ul>
+<li>Single Instance: Resource Allocation Graph me cycle dhundho</li>
+<li>Multiple Instances: Banker jaisa, check karo koi process complete ho sakti hai</li>
+</ul>
+<h4>Recovery:</h4><ul>
+<li><strong>Process Termination:</strong> Ek ek karke terminate karo ya sab abort + restart</li>
+<li><strong>Resource Preemption:</strong> Kisi se resource le lo (victim selection, rollback, starvation avoid)</li>
+</ul></div>
+</div>
+<div class="section" id="u4">
+<h1>Unit 4 - Memory Management</h1>
+<div class="wb"><strong>ALERT:</strong> Ye unit abhi tak dono exam me nahi aayi! Bada chance hai is baar!</div>
+<h2>4.1 Memory Allocation</h2>
+<div class="card"><h4>Techniques:</h4><ol>
+<li><strong>Contiguous:</strong> Process ko continuous block milta hai
+<ul><li>Fixed Partition: Internal fragmentation</li>
+<li>Variable Partition: External fragmentation</li></ul></li>
+<li><strong>Non-Contiguous:</strong> Alag alag jagah - Paging aur Segmentation</li>
+</ol></div>
+<h3>Relocation &amp; Protection</h3>
+<div class="card"><ul>
+<li><strong>Relocation:</strong> Logical->Physical address conversion. Relocation register use hota hai.</li>
+<li><strong>Protection:</strong> Limit register se doosre processes se bachana.</li>
+<li><strong>Sharing:</strong> Do processes code/data share kar sakte hain.</li>
+</ul></div>
+<h2>4.2 Paging</h2>
+<div class="card"><p>Non-contiguous allocation. Memory ko <strong>Pages</strong> (fixed size) me aur frames me divide karo.</p>
+<ul><li>Page Number + Offset = Logical Address</li>
+<li>Page Table: Page -> Frame mapping</li>
+<li>Pros: No external fragmentation. Cons: Internal frag (last page), page table overhead.</li>
+</ul></div>
+<h2>4.3 Segmentation</h2>
+<div class="card"><p>Logical units me divide - code, data, stack segments. Variable size.</p>
+<table><tr><th>Feature</th><th>Paging</th><th>Segmentation</th></tr>
+<tr><td>Size</td><td>Fixed pages</td><td>Variable segments</td></tr>
+<tr><td>Basis</td><td>Physical</td><td>Logical (program structure)</td></tr>
+<tr><td>Fragmentation</td><td>Internal</td><td>External</td></tr>
+<tr><td>User Awareness</td><td>Nahi</td><td>Haan</td></tr></table></div>
+<h2>4.4 Virtual Memory</h2>
+<div class="card"><p>Process ko lagta hai poora memory hai, lekin sirf zaruri parts RAM me. Baaki disk pe.</p>
+<ul><li>Process size physical memory se bada ho sakta hai</li>
+<li>Page fault pe page load, nahi use pe swap out</li></ul></div>
+<h2>4.5 Demand Paging</h2>
+<div class="card"><p>Pages tab load jab use hone ho. Page Fault = page RAM me nahi hai -> disk se load karo.</p>
+<h4>Steps:</h4><ol>
+<li>Process page access karta hai</li>
+<li>Page table check - valid bit</li>
+<li>Valid = direct access. Invalid = PAGE FAULT</li>
+<li>OS free frame dhundhta hai, disk se load karta hai</li>
+<li>Page table update, process restart</li>
+</ol></div>
+<h2>4.6 Page Replacement Algorithms</h2>
+<h3>1. FIFO</h3>
+<div class="card"><p>Sabse purana replace. Simple. <strong>Belady Anomaly:</strong> Frames badhaane pe faults aur badh jaate hain!</p>
+<div class="ib"><p>Ref: 7,0,1,2,0,3,0,4,2,3 | Frames=3</p>
+<p>Page Faults = 9</p></div></div>
+<h3>2. LRU</h3>
+<div class="card"><p>Sabse der se use hua replace. Most practical. Belady Anomaly nahi hota.</p>
+<div class="ib"><p>Ref: 1,2,3,4,1,2,5,1,2,3,4,5 | Frames=3</p>
+<p>Page Faults = 8</p></div></div>
+<h3>3. Optimal</h3>
+<div class="card"><p>Sabse der baad use hone wala replace. Best theoretical, practically impossible.</p>
+<div class="ib"><p>Page Faults = 6 (same example as FIFO)</p></div></div>
+<h3>Comparison</h3>
+<div class="ib"><table><tr><th>Algo</th><th>Page Faults</th><th>Pros</th><th>Cons</th></tr>
+<tr><td>FIFO</td><td>9</td><td>Simple</td><td>Belady Anomaly</td></tr>
+<tr><td>LRU</td><td>8</td><td>Practical, Efficient</td><td>Implement mushkil</td></tr>
+<tr><td>Optimal</td><td>6</td><td>Best possible</td><td>Impossible practically</td></tr></table></div>
+<h2>4.7 Thrashing</h2>
+<div class="card"><p>Pages constantly disk pe load-unload. CPU utilization bahut kam.</p>
+<h4>Solutions:</h4><ul>
+<li><strong>Working Set Model:</strong> Har process ko utna memory do jitna recently use ho raha hai</li>
+<li><strong>Page Fault Frequency:</strong> Rate zyada hai to memory do, kam hai to le lo</li>
+<li><strong>Swapping:</strong> Kuch processes ko disk pe bhejo</li>
+</ul></div>
+</div>
+<div class="section" id="pyq">
+<h1>PYQ Bank - Previous Year Questions</h1>
+<h2>Paper 1: Mid-Term 2024-25</h2>
+<h3>SECTION A (3 marks)</h3>
+<div class="pyq"><div class="q">Q1. Short notes: (i) Time Sharing (ii) Real-Time (iii) Multiprogramming</div>
+<div class="a"><p><strong>Time Sharing:</strong> Har user ko time slice. CPU fast switch karta hai. Example: UNIX. Fayda: Direct interaction.</p>
+<p><strong>Real-Time:</strong> Time strict. Hard RTS: deadline miss=failure (Airplane). Soft RTS: quality down (Video streaming).</p>
+<p><strong>Multiprogramming:</strong> Multiple programs memory me. CPU ek pe rehta, I/O wait pe switch. CPU utilization badhta hai.</p></div></div>
+<div class="pyq"><div class="q">Q2. 5-state process diagram + schedulers ka role</div>
+<div class="a"><p>NEW->READY->RUNNING->TERMINATED. RUNNING<->WAITING.</p>
+<p>Long-term: NEW->READY (admit). Short-term: READY->RUNNING (dispatch). Medium-term: swap memory/disk.</p></div></div>
+<div class="pyq"><div class="q">Q3. Monolithic vs Microkernel + recommendation</div>
+<div class="a"><p>Monolithic: Poora OS ek block. Faster but unreliable. Linux, UNIX.</p>
+<p>Microkernel: Essential kernel only. Slower (IPC) but reliable &amp; secure. Minix, QNX.</p>
+<p><strong>Recommendation:</strong> Microkernel for reliability/security. Monolithic for performance.</p></div></div>
+<div class="pyq"><div class="q">Q4. Semaphores for synchronization + wait/signal</div>
+<div class="a"><p>Semaphore = integer. wait(): s--, if s<0 block. signal(): s++, if s<=0 wakeup.</p>
+<p>Binary (0/1) for mutex. Counting for resource count. Properly used to prevent race conditions.</p></div></div>
+<div class="pyq"><div class="q">Q5. Producer-Consumer with semaphores</div>
+<div class="a"><p>3 semaphores: mutex=1, empty=n, full=0. Producer: wait(empty), wait(mutex), add, signal(mutex), signal(full). Consumer: wait(full), wait(mutex), remove, signal(mutex), signal(empty). Order matters!</p></div></div>
+<h3>SECTION B (5 marks)</h3>
+<div class="pyq"><div class="q">Q6. RR Scheduling: P1(AT=0,BT=5), P2(AT=1,BT=3), P3(AT=2,BT=1), P4(AT=3,BT=2), P5(AT=4,BT=3). TQ=2.</div>
+<div class="a"><p>Gantt: |P1|P2|P3|P4|P5|P1|P2|P5|P1| = 0,2,4,5,7,9,11,13,14,15</p>
+<p>P1:CT=14,TAT=14,WT=9 | P2:CT=12,TAT=11,WT=8 | P3:CT=5,TAT=3,WT=2 | P4:CT=7,TAT=4,WT=2 | P5:CT=13,TAT=9,WT=6</p>
+<p><strong>Avg TAT=8.2 | Avg WT=5.4</strong></p></div></div>
+<div class="pyq"><div class="q">Q7. OS functions/services and their contribution</div>
+<div class="a"><ul><li><strong>Process Mgmt:</strong> CPU scheduling, creation/deletion -> Efficient utilization</li>
+<li><strong>Memory Mgmt:</strong> RAM allocation -> Programs smoothly chalein</li>
+<li><strong>File System:</strong> File operations -> Data organized aur accessible</li>
+<li><strong>I/O Mgmt:</strong> Device drivers -> Smooth device interaction</li>
+<li><strong>Security:</strong> Access control -> Data safe</li></ul>
+<p>Ye sab milkar computer user-friendly, efficient, secure banate hain.</p></div></div>
+<div class="pyq"><div class="q">Q8. Peterson's Solution for mutual exclusion</div>
+<div class="a"><div class="code">int turn; boolean flag[2];
+
+enterCS(i):
+  flag[i] = TRUE;
+  turn = j;  // j = 1-i
+  while(flag[j] && turn == j);  // busy wait
+
+exitCS(i): flag[i] = FALSE;</div>
+<p>Limitations: Busy waiting, sirf 2 threads, memory ordering issues.</p></div></div>
+<h2>Paper 2: Mid-Term 2025-26</h2>
+<h3>SECTION A (3 marks)</h3>
+<div class="pyq"><div class="q">Q1. Multiprogramming vs Multitasking</div>
+<div class="a"><p>Multiprogramming: Ek time pe ek active, I/O tak CPU ek pe. Batch systems.</p>
+<p>Multitasking: Multiple active lagte hain, time slice milta hai. Modern OS: Windows, Linux.</p></div></div>
+<div class="pyq"><div class="q">Q2. Process state diagram + explain each</div>
+<div class="a"><p>NEW (create), READY (CPU wait), RUNNING (execute), WAITING (I/O), TERMINATED (done). Transitions by schedulers and events.</p></div></div>
+<div class="pyq"><div class="q">Q3. Monolithic or Microkernel - which is better for modern OS?</div>
+<div class="a"><p><strong>Microkernel better:</strong> Reliability (isolated services), Security (kam code in kernel), Maintenance (alag alag modules), Modularity. Examples: QNX, Fuchsia.</p></div></div>
+<div class="pyq"><div class="q">Q4. Four conditions for deadlock</div>
+<div class="a"><p>1. Mutual Exclusion (non-sharable) 2. Hold &amp; Wait (resources hold + wait more) 3. No Preemption (forcefully nahi le sakte) 4. Circular Wait (chain of waiting).</p>
+<p>Sab 4 ek saath honi chahiye tabhi deadlock!</p></div></div>
+<div class="pyq"><div class="q">Q5. System calls - role + 3 examples</div>
+<div class="a"><p>System calls = user programs ke through kernel services access. Mode switch hota hai user->kernel.</p>
+<ol><li><strong>fork():</strong> Naya process create (parent ki copy)</li>
+<li><strong>read()/write():</strong> File I/O operations</li>
+<li><strong>exec():</strong> Naya program load, purana replace</li></ol></div></div>
+<h3>SECTION B (5 marks)</h3>
+<div class="pyq"><div class="q">Q6. SRTF: P1(AT=0,BT=8), P2(AT=1,BT=4), P3(AT=2,BT=9), P4(AT=3,BT=5)</div>
+<div class="a"><p>t=0: P1(8). t=1: P2(4)<P1(7), preempt->P2. t=5: P2 done. P4(5)<P1(7)<P3(9), run P4. t=10: P4 done. P1(7)<P3(9), run P1. t=17: P1 done. Run P3. t=26 done.</p>
+<p>Gantt: |P1(0-1)|P2(1-5)|P4(5-10)|P1(10-17)|P3(17-26)|</p>
+<p><strong>Avg TAT=13.0 | Avg WT=6.5</strong></p></div></div>
+<div class="pyq"><div class="q">Q7. OS functions (EXACT repeat of Paper 1 Q7!)</div>
+<div class="a"><p>Same answer! Process Mgmt, Memory Mgmt, File System, I/O, Security, UI - 6 points with contributions.</p></div></div>
+<div class="pyq"><div class="q">Q8. Banker's Algorithm OR Dining Philosophers</div>
+<div class="a"><p><strong>Banker:</strong> Need=Max-Alloc. Find process where Need<=Avail. Execute, Avail+=Alloc. Repeat for safe sequence.</p>
+<p><strong>Dining:</strong> 5 philosophers, 5 forks (semaphores). Deadlock avoid: max 4 allow, ya odd-even fork order.</p></div></div>
+</div>
+<div class="section" id="pred">
+<h1>Hot Predictions - Is Baar Kya Aa Sakta Hai</h1>
+<div class="wb"><strong>PYQ analysis based predictions!</strong> Dono papers compare karke.</div>
+<h2>HIGH PRIORITY (Almost Guaranteed)</h2>
+<div class="card" style="border-left:4px solid var(--red);"><h3>1. Main Functions/Services of OS <span class="ptag ph">5 MARKS</span></h3>
+<p><strong>Dono saal EXACT same!</strong> Process Mgmt, Memory Mgmt, File System, I/O, Security, UI - 6 points.</p></div>
+<div class="card" style="border-left:4px solid var(--red);"><h3>2. Monolithic vs Microkernel <span class="ptag ph">3 MARKS</span></h3>
+<p>Dono saal! Table: Size, Performance, Reliability, Security, Example. Recommendation: Microkernel better.</p></div>
+<div class="card" style="border-left:4px solid var(--red);"><h3>3. Process States / 5-State Diagram <span class="ptag ph">3 MARKS</span></h3>
+<p>Dono saal! 5 states + transitions + schedulers. Diagram banana sikho.</p></div>
+<div class="card" style="border-left:4px solid var(--red);"><h3>4. CPU Scheduling Numerical <span class="ptag ph">5 MARKS</span></h3>
+<p>RR aur SRTF aa chuke. Ab FCFS, SJF, Priority, ya HRRN se aa sakta hai. Har ka 1 example karo!</p></div>
+<div class="card" style="border-left:4px solid var(--red);"><h3>5. Synchronization Problem <span class="ptag ph">3-5 MARKS</span></h3>
+<p>Producer-Consumer &amp; Dining aa chuke. Ab <strong>Readers-Writers ya Peterson's</strong> aa sakta hai.</p></div>
+<h2>MEDIUM PRIORITY</h2>
+<div class="card" style="border-left:4px solid var(--yel);"><h3>6. Deadlock Prevention/Avoidance/Detection/Recovery <span class="ptag pm">5 MARKS</span></h3>
+<p>Abhi tak sirf conditions puchi. Ab methods puche ja sakte hain.</p></div>
+<div class="card" style="border-left:4px solid var(--yel);"><h3>7. Banker's Algorithm Numerical <span class="ptag pm">5 MARKS</span></h3>
+<p>2025 me aaya. Need=Max-Alloc, safe sequence dhundho.</p></div>
+<div class="card" style="border-left:4px solid var(--yel);"><h3>8. System Calls Examples <span class="ptag pm">3 MARKS</span></h3>
+<p>fork(), exec(), wait() detail se.</p></div>
+<div class="card" style="border-left:4px solid var(--yel);"><h3>9. Multiprogramming vs Multitasking <span class="ptag pm">3 MARKS</span></h3>
+<p>Dono saal aaya. Table format me comparison.</p></div>
+<h2>LOW PRIORITY (But UNIT 4 - BADA CHANCE!)</h2>
+<div class="card" style="border-left:4px solid var(--grn);"><h3>10. Paging, Segmentation, Virtual Memory <span class="ptag pl">3-5 MARKS</span></h3>
+<p><strong>UNIT 4 abhi tak exam me nahi aaya!</strong> Paging vs Segmentation table, Virtual Memory, Demand Paging.</p></div>
+<div class="card" style="border-left:4px solid var(--grn);"><h3>11. Page Replacement Algorithms <span class="ptag pl">5 MARKS</span></h3>
+<p>FIFO, LRU, Optimal - numerical practice. Belady Anomaly yaad rakho.</p></div>
+<div class="card" style="border-left:4px solid var(--grn);"><h3>12. Thrashing <span class="ptag pl">3 MARKS</span></h3>
+<p>Kya hai, Working Set Model, Page Fault Frequency.</p></div>
+<div class="card" style="border-left:4px solid var(--grn);"><h3>13. Memory Allocation, Relocation <span class="ptag pl">3 MARKS</span></h3>
+<p>Contiguous vs Non-contiguous. Relocation/limit registers.</p></div>
+</div>
+<div class="section" id="num">
+<h1>Numericals Practice</h1>
+<div class="tb"><strong>Pro Tip:</strong> Steps dikhao - partial marks milte hain working se!</div>
+<h2>1. FCFS Practice</h2>
+<div class="card"><p>Q: P1(AT=0,BT=10), P2(AT=1,BT=4), P3(AT=2,BT=3)</p>
+<div class="code">Gantt: |P1(0-10)|P2(10-14)|P3(14-17)|
+P1:CT=10,TAT=10,WT=0
+P2:CT=14,TAT=13,WT=9
+P3:CT=17,TAT=15,WT=12
+Avg TAT=12.67, Avg WT=7.0
+Convoy effect: P2,P3 ko P1 ki wajah se wait</div></div>
+<h2>2. SJF Practice</h2>
+<div class="card"><p>Q: P1(AT=0,BT=7), P2(AT=2,BT=4), P3(AT=4,BT=1), P4(AT=5,BT=4)</p>
+<div class="code">t=0:P1(7). t=7:P3(1),P2(4),P4(4). Pick P3.
+t=8:P2(4),P4(4). Pick P2. t=12:P4. t=16 done.
+Gantt: |P1(0-7)|P3(7-8)|P2(8-12)|P4(12-16)|
+Avg TAT=8.0, Avg WT=4.0</div></div>
+<h2>3. HRRN Practice</h2>
+<div class="card"><p>Q: P1(AT=0,BT=3), P2(AT=1,BT=6), P3(AT=2,BT=1), P4(AT=3,BT=2)</p>
+<div class="code">R=(W+S)/S
+t=0:P1. t=3:R(P2)=1.33,R(P3)=2.0,R(P4)=1.0. Pick P3.
+t=4:R(P2)=1.5,R(P4)=1.5. Tie->P4(FCFS). t=6:P2.
+Gantt: |P1(0-3)|P3(3-4)|P4(4-6)|P2(6-12)|
+Avg WT=1.75</div></div>
+<h2>4. Priority Practice</h2>
+<div class="card"><p>Q: P1(AT=0,BT=4,Pri=2), P2(AT=1,BT=3,Pri=1), P3(AT=2,BT=5,Pri=4), P4(AT=3,BT=2,Pri=3)</p>
+<div class="code">t=0:P1. t=4:P3(4),P4(3),P2(1). Pick P3.
+t=9:P4(3),P2(1). Pick P4. t=11:P2.
+Gantt: |P1(0-4)|P3(4-9)|P4(9-11)|P2(11-14)|
+Avg WT=4.5</div></div>
+<h2>5. Page Replacement Comparison</h2>
+<div class="card"><p>Ref: 7,0,1,2,0,3,0,4,2,3 | Frames=3</p>
+<div class="code">FIFO: 9 page faults (Belady Anomaly possible)
+LRU: 8 page faults (most practical)
+Optimal: 6 page faults (best possible, theoretical)
+Key: FIFO - Purana replace. LRU - Least recently used. Optimal - Farthest future use.</div></div>
+</div>
+<div class="section" id="form">
+<h1>Formula Sheet - Quick Revision</h1>
+<h2>CPU Scheduling</h2>
+<div class="fbox">
+<p class="fm">TAT = CT - AT</p>
+<p class="fm">WT = TAT - BT</p>
+<p class="fm">RT = First Response Time - AT</p>
+<p class="fm">HRRN: Response Ratio = (W + S) / S</p>
+</div>
+<h2>Memory Management</h2>
+<div class="fbox">
+<p class="fm">Page Number = Logical Addr / Page Size</p>
+<p class="fm">Page Offset = Logical Addr mod Page Size</p>
+<p class="fm">Physical Addr = Frame Num * Page Size + Offset</p>
+</div>
+<h2>Banker's Algorithm</h2>
+<div class="fbox">
+<p class="fm">Need[i] = Max[i] - Allocation[i]</p>
+<p class="fm">Safe: Need[i] <= Available, then Available += Allocation[i]</p>
+</div>
+<h2>Deadlock</h2>
+<div class="fbox">
+<p class="fm">4 Conditions: Mutual Exclusion + Hold &amp; Wait + No Preemption + Circular Wait</p>
+</div>
+<h2>Semaphores</h2>
+<div class="fbox">
+<p class="fm">wait(S): S=S-1; if S&lt;0 then block</p>
+<p class="fm">signal(S): S=S+1; if S&lt;=0 then wakeup</p>
+</div>
+<h2>Quick Reference</h2>
+<table><tr><th>Algo</th><th>Type</th><th>Best For</th><th>Problem</th></tr>
+<tr><td>FCFS</td><td>Non-Preemptive</td><td>Simple jobs</td><td>Convoy effect</td></tr>
+<tr><td>SJF</td><td>Non-Preemptive</td><td>Min avg WT</td><td>Starvation</td></tr>
+<tr><td>SRTF</td><td>Preemptive</td><td>Min avg WT</td><td>Starvation, overhead</td></tr>
+<tr><td>RR</td><td>Preemptive</td><td>Interactive systems</td><td>Context switch overhead</td></tr>
+<tr><td>Priority</td><td>Both</td><td>Important tasks</td><td>Starvation (aging se solve)</td></tr>
+<tr><td>HRRN</td><td>Non-Preemptive</td><td>Balanced</td><td>No starvation</td></tr></table>
+</div>
+<script src="script.js"></script>
+</div>
+</body>
+</html>
